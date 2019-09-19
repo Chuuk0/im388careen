@@ -33,7 +33,6 @@ public class CameraController : MonoBehaviour
         }
 
         cameraDistance = (Camera.transform.localPosition.y - minDistance.x) / (maxDistance.x - minDistance.x);
-        Debug.Log(cameraDistance);
     }
     void LateUpdate()
     {
