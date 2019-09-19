@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     public float radius = 5.0f;
     public float upforce = 1.0f;
     private MeshRenderer mr;
+    public GameObject particle;
 
     // Start is called before the first frame update
     void Start()
@@ -33,10 +34,10 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        Instantiate(particle, transform.position, transform.rotation = new Quaternion(0, 0, 0, 0));
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<BoxCollider>().enabled = false;
         rb.velocity = new Vector3(0, 0, 0);
-        Debug.Log("boom boom");
         Vector3 explosionPosition = transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPosition, radius);
         foreach (Collider hit in colliders) //for each collider hit with the explosions collider, run this

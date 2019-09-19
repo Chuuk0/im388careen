@@ -13,7 +13,7 @@ public class TankMovement : MonoBehaviour
     private float m_rotate;
     public float turretSpeed = 60f;
     public float barrelSpeed = 60f;
-    public float turretCompensation = 5;
+    private float turretCompensation = 5;
     private bool canShoot = true;
 
     //Gameobjects
@@ -23,6 +23,9 @@ public class TankMovement : MonoBehaviour
     public GameObject cameraOBJ;
     public GameObject bullet;
     private GameObject cof;
+
+    private CameraController cameraScript;
+
 
     private void Start()
     {
@@ -34,6 +37,8 @@ public class TankMovement : MonoBehaviour
         barrel = GameObject.Find("Turret/Barrel");
         cof = GameObject.Find("CenterOfMass");
         rb.centerOfMass = cof.transform.localPosition;
+
+        cameraScript = cameraOBJ.GetComponent<CameraController>();
     }
 
     public void FixedUpdate()
@@ -59,6 +64,8 @@ public class TankMovement : MonoBehaviour
 
     void turretMove()
     {
+        turretCompensation = Mathf.Lerp(2, 6, cameraScript.cameraDistance);
+
         Vector3 turretCurrentAngle = turret.transform.localEulerAngles;
         Vector3 turretTargetAngle = cameraOBJ.transform.localEulerAngles;
         turretTargetAngle = new Vector3(cameraOBJ.transform.localEulerAngles.x, cameraOBJ.transform.localEulerAngles.y - transform.eulerAngles.y, cameraOBJ.transform.localEulerAngles.z); //subtracts tanks rotation from the rotation of the turret so that it does not follow its y rotation.

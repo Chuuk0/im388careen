@@ -6,15 +6,34 @@ public class CameraController : MonoBehaviour
 {
     public GameObject target;
     public float rotateSpeed = 50f;
+    private GameObject Camera;
+    public Vector2 minDistance = new Vector2(3, -5);
+    public Vector2 maxDistance;
+    public float cameraSpeed = 1;
+    public float cameraDistance;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Camera = GameObject.Find("Camera");
     }
 
     private void Update()
     {
         transform.position = target.transform.position;
+
+        new Vector3(0, minDistance.x, minDistance.y);
+        if(Input.mouseScrollDelta.y < 0)
+        {
+            Camera.transform.localPosition = Vector3.MoveTowards(Camera.transform.localPosition, new Vector3(0, minDistance.x, minDistance.y), cameraSpeed * Time.deltaTime);
+        }
+        if(Input.mouseScrollDelta.y > 0)
+        {
+            Camera.transform.localPosition = Vector3.MoveTowards(Camera.transform.localPosition, new Vector3(0, maxDistance.x, maxDistance.y), cameraSpeed * Time.deltaTime);
+        }
+
+        cameraDistance = (Camera.transform.localPosition.y - minDistance.x) / (maxDistance.x - minDistance.x);
+        Debug.Log(cameraDistance);
     }
     void LateUpdate()
     {

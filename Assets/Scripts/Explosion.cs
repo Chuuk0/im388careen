@@ -9,6 +9,8 @@ public class Explosion : MonoBehaviour
     public float upforce = 1.0f;
     public bool explode = false;
     public float fuseTime = 5f;
+    public GameObject particle;
+    private bool deployParticles = true;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,12 @@ public class Explosion : MonoBehaviour
                 rb.AddExplosionForce(power, explosionPosition, radius, upforce, ForceMode.Impulse);
             }
         }
+        if(deployParticles == true)
+        {
+            deployParticles = false;
+            Instantiate(particle, transform.position, transform.rotation = new Quaternion(0,0,0,0));
+        }
         Destroy(gameObject, 1);
     }
+
 }
