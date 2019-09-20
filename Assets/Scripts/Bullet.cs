@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.AddRelativeForce(0f, 0, speed * 100 * Time.deltaTime, ForceMode.Impulse);
+        rb.AddRelativeForce(0f, 0, speed,  ForceMode.Impulse);
         GetComponent<BoxCollider>().enabled = false;
         Invoke("Enable", 0.05f);
     }

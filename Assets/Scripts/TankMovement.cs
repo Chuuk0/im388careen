@@ -64,7 +64,7 @@ public class TankMovement : MonoBehaviour
 
     void turretMove()
     {
-        turretCompensation = Mathf.Lerp(2, 6, cameraScript.cameraDistance);
+        turretCompensation = Mathf.Lerp(2, 4, cameraScript.cameraDistance);
 
         Vector3 turretCurrentAngle = turret.transform.localEulerAngles;
         Vector3 turretTargetAngle = cameraOBJ.transform.localEulerAngles;
